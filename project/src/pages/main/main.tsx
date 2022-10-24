@@ -1,12 +1,14 @@
-import FilmCard, {FilmCardProps} from '../../components/film-card/film-card';
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/page-footer/page-footer';
 import GenreItem, {GenreProps} from '../../components/genre-item/genre-item';
-import {PromoFilmData} from '../../types/promo-film-data';
+import {Film} from '../../types/film';
+import FilmsList from '../../components/films-list/films-list';
+import {RoutesEnum} from '../../types/routes';
+import {Link} from 'react-router-dom';
 
 export type MainProps = {
-  promoData: PromoFilmData;
-  films: FilmCardProps[];
+  promoFilm: Film;
+  films: Film[];
   genres: GenreProps[];
 }
 
@@ -15,7 +17,7 @@ function MainPage(props: MainProps) {
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={props.promoData.bgImagePath} alt={props.promoData.title}/>
+          <img src={props.promoFilm.bgImagePath} alt={props.promoFilm.title}/>
         </div>
         <h1 className="visually-hidden">WTW</h1>
 
@@ -29,7 +31,7 @@ function MainPage(props: MainProps) {
               </div>
             </li>
             <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
+              <Link to={RoutesEnum.Login} className="user-block__link">Sign out</Link>
             </li>
           </ul>
         </header>
@@ -37,30 +39,31 @@ function MainPage(props: MainProps) {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={props.promoData.imagePath} alt={props.promoData.title} width="218" height="327"/>
+              <img src={props.promoFilm.imagePath} alt={props.promoFilm.title} width="218" height="327"/>
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{props.promoData.title}</h2>
+              <h2 className="film-card__title">{props.promoFilm.title}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{props.promoData.genre}</span>
-                <span className="film-card__year">{props.promoData.releaseYear}</span>
+                <span className="film-card__genre">{props.promoFilm.genre}</span>
+                <span className="film-card__year">{props.promoFilm.year}</span>
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <Link to={`/player/${props.promoFilm.id}`} className="btn btn--play film-card__button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use href="#play-s"></use>
+                    <use xlinkHref="#play-s"/>
                   </svg>
                   <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button">
+                </Link>
+                <Link to={RoutesEnum.MyList} className="btn btn--list film-card__button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use href="#add"></use>
+                    <use xlinkHref="#add"/>
                   </svg>
                   <span>My list</span>
                   <span className="film-card__count">9</span>
-                </button>
+                </Link>
+                <Link to={`/films/${props.promoFilm.id}/review`} className="btn film-card__button">Add review</Link>
               </div>
             </div>
           </div>
@@ -75,9 +78,8 @@ function MainPage(props: MainProps) {
             {props.genres.map((genre) => <GenreItem key={genre.name} name={genre.name}/>)}
           </ul>
 
-          <div className="catalog__films-list">
-            {props.films.map((film) => <FilmCard key={film.filmName} imagePath={film.imagePath} filmName={film.filmName}/>)}
-          </div>
+          <FilmsList films={props.films}/>
+
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>

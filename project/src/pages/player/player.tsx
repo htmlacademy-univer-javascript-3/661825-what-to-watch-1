@@ -1,9 +1,23 @@
-function Player() {
+import {Film} from '../../types/film';
+import {Link, Navigate, useParams} from 'react-router-dom';
+import {RoutesEnum} from '../../types/routes';
+
+type PlayerProps = {
+  films: Film[];
+}
+
+function Player({films}: PlayerProps) {
+  const id = Number(useParams().id);
+  const film = films.find((curFilm) => curFilm.id === id);
+
+  if (!film) {
+    return <Navigate to={RoutesEnum.Default}/>;
+  }
+
   return (
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg"/>
-
-      <button type="button" className="player__exit">Exit</button>
+      <video src={film.videoLink} className="player__video" poster={film.bgImagePath}/>
+      <Link to={`/films/${id}`} type='button' className='player__exit'>Exit</Link>
 
       <div className="player__controls">
         <div className="player__controls-row">
@@ -12,7 +26,7 @@ function Player() {
             <div className="player__toggler" style={{left: '30%'}}>Toggler</div>
 
           </div>
-          <div className="player__time-value">1:30:29</div>
+          <div className="player__time-value">{film.duration}</div>
         </div>
 
         <div className="player__controls-row">
