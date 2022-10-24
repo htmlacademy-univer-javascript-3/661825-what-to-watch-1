@@ -1,6 +1,6 @@
-import Logo from "../../components/logo/logo";
-import FilmCard from "../../components/film-card/film-card";
-import Footer from "../../components/page-footer/page-footer";
+import Logo from '../../components/logo/logo';
+import FilmCard from '../../components/film-card/film-card';
+import Footer from '../../components/page-footer/page-footer';
 
 function FilmPage() {
   return (
@@ -14,7 +14,7 @@ function FilmPage() {
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header film-card__head">
-            <Logo className={"logo__link"}/>
+            <Logo className={'logo__link'}/>
 
             <ul className="user-block">
               <li className="user-block__item">
