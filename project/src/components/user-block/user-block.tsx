@@ -9,7 +9,7 @@ function UserBlock(isAuthorize: boolean) {
         </li>
 
         <li className="user-block__item">
-          <a className="user-block__link">Sign out</a>
+          <a href="#todo" className="user-block__link">Sign out</a>
         </li>
       </ul>
     );

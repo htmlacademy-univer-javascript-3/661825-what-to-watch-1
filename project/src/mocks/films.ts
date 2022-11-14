@@ -17,7 +17,7 @@ export const films: Film[] = [
     ratingLevel: 'Very Good',
     ratingScore: '8.9',
     ratingCount: '240',
-    videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    videoLink: 'https://10.react.pages.academy/static/film/video/matrix.mp4',
     director: 'Wes Anderson',
     starring: ['Bill Murray', 'Edward Norton', 'Jude Law', 'Willem Dafoe', 'and other'],
     duration: '1:39:27'
@@ -38,7 +38,7 @@ export const films: Film[] = [
     ratingLevel: 'Very Good',
     ratingScore: '8.9',
     ratingCount: '240',
-    videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    videoLink: 'https://10.react.pages.academy/static/film/video/bubbles.mp4',
     director: 'Wes Anderson',
     starring: ['Bill Murray', 'Edward Norton', 'Jude Law', 'Willem Dafoe', 'and other'],
     duration: '1:39:27'
@@ -59,7 +59,7 @@ export const films: Film[] = [
     ratingLevel: 'Very Good',
     ratingScore: '8.9',
     ratingCount: '240',
-    videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    videoLink: 'https://10.react.pages.academy/static/film/video/bubbles.mp4',
     director: 'Wes Anderson',
     starring: ['Bill Murray', 'Edward Norton', 'Jude Law', 'Willem Dafoe', 'and other'],
     duration: '1:39:27'
@@ -80,7 +80,7 @@ export const films: Film[] = [
     ratingLevel: 'Very Good',
     ratingScore: '8.9',
     ratingCount: '240',
-    videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    videoLink: 'https://10.react.pages.academy/static/film/video/bubbles.mp4',
     director: 'Wes Anderson',
     starring: ['Bill Murray', 'Edward Norton', 'Jude Law', 'Willem Dafoe', 'and other'],
     duration: '1:39:27'
@@ -101,7 +101,7 @@ export const films: Film[] = [
     ratingLevel: 'Very Good',
     ratingScore: '8.9',
     ratingCount: '240',
-    videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    videoLink: 'https://10.react.pages.academy/static/film/video/bubbles.mp4',
     director: 'Wes Anderson',
     starring: ['Bill Murray', 'Edward Norton', 'Jude Law', 'Willem Dafoe', 'and other'],
     duration: '1:39:27'
@@ -122,7 +122,7 @@ export const films: Film[] = [
     ratingLevel: 'Very Good',
     ratingScore: '8.9',
     ratingCount: '240',
-    videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    videoLink: 'https://10.react.pages.academy/static/film/video/bubbles.mp4',
     director: 'Wes Anderson',
     starring: ['Bill Murray', 'Edward Norton', 'Jude Law', 'Willem Dafoe', 'and other'],
     duration: '1:39:27'
@@ -143,7 +143,7 @@ export const films: Film[] = [
     ratingLevel: 'Very Good',
     ratingScore: '8.9',
     ratingCount: '240',
-    videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    videoLink: 'https://10.react.pages.academy/static/film/video/bubbles.mp4',
     director: 'Wes Anderson',
     starring: ['Bill Murray', 'Edward Norton', 'Jude Law', 'Willem Dafoe', 'and other'],
     duration: '1:39:27'
@@ -164,7 +164,7 @@ export const films: Film[] = [
     ratingLevel: 'Very Good',
     ratingScore: '8.9',
     ratingCount: '240',
-    videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    videoLink: 'https://10.react.pages.academy/static/film/video/bubbles.mp4',
     director: 'Wes Anderson',
     starring: ['Bill Murray', 'Edward Norton', 'Jude Law', 'Willem Dafoe', 'and other'],
     duration: '1:39:27'
