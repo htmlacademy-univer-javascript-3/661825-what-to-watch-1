@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import {GenreProps} from './components/genre-item/genre-item';
 import {films} from './mocks/films';
+import {reviews} from './mocks/reviews';
 
 const genres: GenreProps[] = [
   {name: 'All genre'},
@@ -23,7 +24,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App films={films} genres={genres}/>
+    <App films={films} genres={genres} reviews={reviews}/>
   </React.StrictMode>,
 );
 
