@@ -4,12 +4,16 @@ import {Film} from '../../types/film';
 import {Link, Navigate, useParams} from 'react-router-dom';
 import {RoutesEnum} from '../../types/routes';
 import FilmsList from '../../components/films-list/films-list';
+import React from 'react';
+import FilmTabs from '../../components/film-tabs/film-tabs';
+import { ReviewType } from '../../types/review';
 
 type FilmProps = {
+  reviews: ReviewType[];
   films: Film[];
 }
 
-function FilmPage({films}: FilmProps) {
+function FilmPage({reviews, films}: FilmProps) {
   const id = Number(useParams().id);
   const film = films.find((curFilm) => curFilm.id === id);
 
@@ -76,35 +80,7 @@ function FilmPage({films}: FilmProps) {
               <img src={film.imagePath} alt={film.title} width="218" height="327"/>
             </div>
 
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="#todo" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#todo" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#todo" className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="film-rating">
-                <div className="film-rating__score">{film.ratingScore}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">{film.ratingLevel}</span>
-                  <span className="film-rating__count">{film.ratingCount}</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                <p>{film.description}</p>
-                <p className="film-card__director"><strong>Director: {film.director}</strong></p>
-                <p className="film-card__starring"><strong>Starring: {film.starring.join(', ')}</strong></p>
-              </div>
-            </div>
+            <FilmTabs film={film} reviews={reviews}/>
           </div>
         </div>
       </section>
@@ -114,7 +90,7 @@ function FilmPage({films}: FilmProps) {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            <FilmsList films={films.slice(0, 4)}/>
+            <FilmsList films={films.filter((moreFilm) => moreFilm.genre === film.genre).splice(0, 4)}/>
           </div>
         </section>
         <Footer/>
