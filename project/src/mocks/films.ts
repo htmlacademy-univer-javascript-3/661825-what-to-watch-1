@@ -5,7 +5,7 @@ export const films: Film[] = [
     id: 1,
     title: 'The Grand Budapest Hotel',
     year: '2014',
-    genre: 'Drama',
+    genre: 'Comedy',
     imagePath: 'img/the-grand-budapest-hotel-poster.jpg',
     bgImagePath: 'img/bg-the-grand-budapest-hotel.jpg',
     description:
@@ -26,7 +26,7 @@ export const films: Film[] = [
     id: 2,
     title: 'Fantastic Beasts: The Crimes of Grindelwald poster',
     year: '2014',
-    genre: 'Drama',
+    genre: 'Trillers',
     imagePath: 'img/fantastic-beasts-the-crimes-of-grindelwald.jpg',
     bgImagePath: 'img/bg-the-grand-budapest-hotel.jpg',
     description:
@@ -68,7 +68,7 @@ export const films: Film[] = [
     id: 4,
     title: 'Macbeth',
     year: '2014',
-    genre: 'Drama',
+    genre: 'Sci-Fi',
     imagePath: 'img/macbeth.jpg',
     bgImagePath: 'img/bg-the-grand-budapest-hotel.jpg',
     description:

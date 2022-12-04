@@ -1,18 +1,22 @@
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/page-footer/page-footer';
-import GenreItem, {GenreProps} from '../../components/genre-item/genre-item';
 import {Film} from '../../types/film';
 import FilmsList from '../../components/films-list/films-list';
 import {RoutesEnum} from '../../types/routes';
 import {Link} from 'react-router-dom';
+import {useAppSelector} from '../../hooks';
+import GenresList from '../../components/genres-list/genres-list';
+import {ALL_GENRES} from '../../types/genres';
 
 export type MainProps = {
   promoFilm: Film;
-  films: Film[];
-  genres: GenreProps[];
 }
 
 function MainPage(props: MainProps) {
+  const { films, currentGenre } = useAppSelector((state) => state);
+  const filmsFiltered = films.filter((film) => film.genre === currentGenre || currentGenre === ALL_GENRES);
+  const genres = [ALL_GENRES].concat([...new Set(films.map((film) => film.genre))]);
+
   return (
     <>
       <section className="film-card">
@@ -73,13 +77,8 @@ function MainPage(props: MainProps) {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-          <ul className="catalog__genres-list">
-            {props.genres.map((genre) => <GenreItem key={genre.name} name={genre.name}/>)}
-          </ul>
-
-          <FilmsList films={props.films}/>
-
+          <GenresList genres={genres} activeGenre={currentGenre}/>
+          <FilmsList films={filmsFiltered}/>
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>
