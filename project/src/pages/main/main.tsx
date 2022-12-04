@@ -7,6 +7,10 @@ import {Link} from 'react-router-dom';
 import {useAppSelector} from '../../hooks';
 import GenresList from '../../components/genres-list/genres-list';
 import {ALL_GENRES} from '../../types/genres';
+import {useState} from 'react';
+import ShowMoreButton from '../../components/show-more-button/show-more-button';
+
+const SHOW_MORE_STEP_COUNT = 8;
 
 export type MainProps = {
   promoFilm: Film;
@@ -14,8 +18,15 @@ export type MainProps = {
 
 function MainPage(props: MainProps) {
   const { films, currentGenre } = useAppSelector((state) => state);
-  const filmsFiltered = films.filter((film) => film.genre === currentGenre || currentGenre === ALL_GENRES);
+  const [showedFilmsCount, setShowedFilmsCount] = useState(SHOW_MORE_STEP_COUNT);
+  const filmsFiltered = films
+    .filter((film) => film.genre === currentGenre || currentGenre === ALL_GENRES)
+    .slice(0, showedFilmsCount);
   const genres = [ALL_GENRES].concat([...new Set(films.map((film) => film.genre))]);
+
+  const handleShowMoreOnClick = () => {
+    setShowedFilmsCount(showedFilmsCount + SHOW_MORE_STEP_COUNT);
+  };
 
   return (
     <>
@@ -79,9 +90,7 @@ function MainPage(props: MainProps) {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenresList genres={genres} activeGenre={currentGenre}/>
           <FilmsList films={filmsFiltered}/>
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <ShowMoreButton onClick={handleShowMoreOnClick}/>
         </section>
 
         <Footer/>
