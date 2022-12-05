@@ -12,7 +12,7 @@ function GenreItem(props: GenreProps) {
 
   const handleOnClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    dispatch(changeGenre({genre: genre}));
+    dispatch(changeGenre(genre));
   };
 
   return(

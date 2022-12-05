@@ -1,16 +1,19 @@
 export type Film = {
-  id: number,
-  title: string,
-  genre: string,
-  year: string,
-  imagePath: string,
-  bgImagePath: string,
-  director: string,
-  starring: string[],
-  description: string,
-  ratingScore: string,
-  ratingLevel: string,
-  ratingCount: string,
-  videoLink: string,
-  duration: string
+  id: number
+  name: string
+  posterImage: string
+  previewImage: string
+  backgroundImage: string
+  backgroundColor: string
+  videoLink: string
+  previewVideoLink: string
+  description: string
+  rating: number
+  scoresCount: number
+  director: string
+  starring: [string]
+  runTime: number
+  genre: string
+  released: number
+  isFavorite: boolean
 }

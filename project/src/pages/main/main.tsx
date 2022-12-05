@@ -32,7 +32,7 @@ function MainPage(props: MainProps) {
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={props.promoFilm.bgImagePath} alt={props.promoFilm.title}/>
+          <img src={props.promoFilm.backgroundImage} alt={props.promoFilm.name}/>
         </div>
         <h1 className="visually-hidden">WTW</h1>
 
@@ -54,14 +54,14 @@ function MainPage(props: MainProps) {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={props.promoFilm.imagePath} alt={props.promoFilm.title} width="218" height="327"/>
+              <img src={props.promoFilm.posterImage} alt={props.promoFilm.name} width="218" height="327"/>
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{props.promoFilm.title}</h2>
+              <h2 className="film-card__title">{props.promoFilm.name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{props.promoFilm.genre}</span>
-                <span className="film-card__year">{props.promoFilm.year}</span>
+                <span className="film-card__year">{props.promoFilm.released}</span>
               </p>
 
               <div className="film-card__buttons">

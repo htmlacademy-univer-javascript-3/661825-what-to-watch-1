@@ -26,8 +26,8 @@ function VideoPlayer(props: VideoPlayerProps) {
   return (
     <video
       ref={videoPlayerRef}
-      poster={props.film.imagePath}
-      src={props.film.videoLink}
+      poster={props.film.previewImage}
+      src={props.film.previewVideoLink}
       muted={props.muted}
       width={props.width}
       height={props.height}
