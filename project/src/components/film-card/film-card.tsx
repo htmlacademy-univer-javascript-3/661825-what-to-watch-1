@@ -45,7 +45,7 @@ function FilmCard(props: FilmCardProps) {
         <VideoPlayer width={280} height={175} film={film} isPlaying={isVideoPlaying} muted/>
       </div>
       <h3 className="small-film-card__title">
-        <Link to={`/films/${film.id}`} className='small-film-card__link'>{film.title}</Link>
+        <Link to={`/films/${film.id}`} className='small-film-card__link'>{film.name}</Link>
       </h3>
     </article>
   );

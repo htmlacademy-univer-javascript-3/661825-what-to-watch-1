@@ -3,7 +3,8 @@ import {store} from '../store';
 
 export type AppState = {
   films: Film[],
-  currentGenre: string
+  currentGenre: string,
+  isDataLoaded: boolean
 }
 
 export type State = ReturnType<typeof store.getState>;

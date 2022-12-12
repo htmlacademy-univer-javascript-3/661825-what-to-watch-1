@@ -16,7 +16,7 @@ function Player({films}: PlayerProps) {
 
   return (
     <div className="player">
-      <video src={film.videoLink} className="player__video" poster={film.bgImagePath}/>
+      <video src={film.videoLink} className="player__video" poster={film.backgroundImage}/>
       <Link to={`/films/${id}`} type='button' className='player__exit'>Exit</Link>
 
       <div className="player__controls">
@@ -26,7 +26,7 @@ function Player({films}: PlayerProps) {
             <div className="player__toggler" style={{left: '30%'}}>Toggler</div>
 
           </div>
-          <div className="player__time-value">{film.duration}</div>
+          <div className="player__time-value">{film.runTime}</div>
         </div>
 
         <div className="player__controls-row">

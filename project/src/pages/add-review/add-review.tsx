@@ -20,7 +20,7 @@ function AddReviewPage({films}: AddReviewProps) {
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src={film.bgImagePath} alt={film.title}/>
+          <img src={film.backgroundImage} alt={film.name}/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -30,7 +30,7 @@ function AddReviewPage({films}: AddReviewProps) {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={`/films/${id}`} className="breadcrumbs__link">{film.title}</Link>
+                <Link to={`/films/${id}`} className="breadcrumbs__link">{film.name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <Link to={`/films/${id}/review`} className="breadcrumbs__link">Add Review</Link>
@@ -51,7 +51,7 @@ function AddReviewPage({films}: AddReviewProps) {
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src={film.imagePath} alt={film.title} width="218" height="327"/>
+          <img src={film.posterImage} alt={film.name} width="218" height="327"/>
         </div>
       </div>
 
