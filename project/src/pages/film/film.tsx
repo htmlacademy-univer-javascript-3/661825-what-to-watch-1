@@ -7,6 +7,7 @@ import FilmsList from '../../components/films-list/films-list';
 import React from 'react';
 import FilmTabs from '../../components/film-tabs/film-tabs';
 import { ReviewType } from '../../types/review';
+import UserBlock from '../../components/user-block/user-block';
 
 type FilmProps = {
   reviews: ReviewType[];
@@ -33,17 +34,7 @@ function FilmPage({reviews, films}: FilmProps) {
 
           <header className="page-header film-card__head">
             <Logo className={'logo__link'}/>
-
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-                </div>
-              </li>
-              <li className="user-block__item">
-                <Link to={RoutesEnum.Login} className="user-block__link">Sign out</Link>
-              </li>
-            </ul>
+            <UserBlock/>
           </header>
 
           <div className="film-card__wrap">
