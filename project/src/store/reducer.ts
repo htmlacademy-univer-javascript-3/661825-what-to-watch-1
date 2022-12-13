@@ -1,12 +1,14 @@
 import {AppState} from '../types/store';
 import {ALL_GENRES} from '../types/genres';
 import {createReducer} from '@reduxjs/toolkit';
-import {changeGenre, fillFilmsList, setIsDataLoaded} from './action';
+import {changeGenre, fillFilmsList, requireAuthorization, setIsDataLoaded} from './action';
+import {AuthorizationStatus} from '../types/auth-status';
 
 const initialState: AppState = {
   films: [],
   currentGenre: ALL_GENRES,
-  isDataLoaded: false
+  isDataLoaded: false,
+  authorizationStatus: AuthorizationStatus.Unknown
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -19,5 +21,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setIsDataLoaded, (state, action) => {
       state.isDataLoaded = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
     });
 });

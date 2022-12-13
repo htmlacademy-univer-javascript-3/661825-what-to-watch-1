@@ -17,7 +17,7 @@ type AppProps = {
 }
 
 function App(props: AppProps): JSX.Element {
-  const { isDataLoaded, films } = useAppSelector((state) => state);
+  const { isDataLoaded, films, authorizationStatus } = useAppSelector((state) => state);
   const promoFilm = films[0];
   const { reviews } = props;
 
@@ -30,7 +30,12 @@ function App(props: AppProps): JSX.Element {
       <Routes>
         <Route path={RoutesEnum.Main} element={<Main promoFilm={promoFilm}/>}/>
         <Route path={RoutesEnum.Login} element={<SignInPage/>}/>
-        <Route path={RoutesEnum.MyList} element={<PrivateRoute isAuth={false}><MyListPage films={films}/></PrivateRoute>}/>
+        <Route path={RoutesEnum.MyList} element={
+          <PrivateRoute authorizationStatus={authorizationStatus}>
+            <MyListPage films={films}/>
+          </PrivateRoute>
+        }
+        />
         <Route path={RoutesEnum.Film} element={<FilmPage films={films} reviews={reviews}/>}/>
         <Route path={RoutesEnum.AddReview} element={<AddReviewPage films={films}/>}/>
         <Route path={RoutesEnum.Player} element={<Player films={films}/>}/>

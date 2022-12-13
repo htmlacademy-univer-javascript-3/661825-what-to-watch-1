@@ -9,6 +9,7 @@ import GenresList from '../../components/genres-list/genres-list';
 import {ALL_GENRES} from '../../types/genres';
 import {useState} from 'react';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
+import UserBlock from '../../components/user-block/user-block';
 
 const SHOW_MORE_STEP_COUNT = 8;
 
@@ -38,17 +39,7 @@ function MainPage(props: MainProps) {
 
         <header className="page-header film-card__head">
           <Logo className={'logo__link'}/>
-
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-              </div>
-            </li>
-            <li className="user-block__item">
-              <Link to={RoutesEnum.Login} className="user-block__link">Sign out</Link>
-            </li>
-          </ul>
+          <UserBlock/>
         </header>
 
         <div className="film-card__wrap">
