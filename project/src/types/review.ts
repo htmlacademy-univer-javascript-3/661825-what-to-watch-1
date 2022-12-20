@@ -1,7 +1,10 @@
 export type ReviewType = {
-  id: number,
-  rating: string,
-  text: string,
-  author: string,
+  comment: string
   date: string
+  id: number
+  rating: number
+  user: {
+    id: number
+    name: string
+  }
 }

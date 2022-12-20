@@ -10,6 +10,10 @@ export enum RoutesEnum {
 
 export enum ApiRoutesEnum {
   Films = '/films',
+  Comments = '/comments',
+  Favorite = '/favorite',
+  SimilarFilms = '/similar',
+  PromoFilm = '/promo',
   Login = '/login',
   Logout = '/logout'
 }
