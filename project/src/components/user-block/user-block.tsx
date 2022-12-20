@@ -26,7 +26,7 @@ function AuthorizatedUser(props: AuthorizatedUserProps) {
         </div>
       </li>
       <li className="user-block__item">
-        <a className="user-block__link" onClick={handleOnClick}>Sign out</a>
+        <Link to={'/'} className="user-block__link" onClick={handleOnClick}>Sign out</Link>
       </li>
     </>
   );

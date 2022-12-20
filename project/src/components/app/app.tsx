@@ -8,18 +8,11 @@ import AddReviewPage from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
-import { ReviewType } from '../../types/review';
 import {useAppSelector} from '../../hooks';
 import LoadingSpinner from '../loading-spinner/loading-spinner';
 
-type AppProps = {
-  reviews: ReviewType[];
-}
-
-function App(props: AppProps): JSX.Element {
+function App(): JSX.Element {
   const { isDataLoaded, films, authorizationStatus } = useAppSelector((state) => state);
-  const promoFilm = films[0];
-  const { reviews } = props;
 
   if (!isDataLoaded){
     return <LoadingSpinner/>;
@@ -28,7 +21,7 @@ function App(props: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={RoutesEnum.Main} element={<Main promoFilm={promoFilm}/>}/>
+        <Route path={RoutesEnum.Main} element={<Main/>}/>
         <Route path={RoutesEnum.Login} element={<SignInPage/>}/>
         <Route path={RoutesEnum.MyList} element={
           <PrivateRoute authorizationStatus={authorizationStatus}>
@@ -36,10 +29,15 @@ function App(props: AppProps): JSX.Element {
           </PrivateRoute>
         }
         />
-        <Route path={RoutesEnum.Film} element={<FilmPage films={films} reviews={reviews}/>}/>
-        <Route path={RoutesEnum.AddReview} element={<AddReviewPage films={films}/>}/>
+        <Route path={RoutesEnum.Film} element={<FilmPage/>}/>
+        <Route path={RoutesEnum.AddReview} element={
+          <PrivateRoute authorizationStatus={authorizationStatus}>
+            <AddReviewPage films={films}/>
+          </PrivateRoute>
+        }
+        />
         <Route path={RoutesEnum.Player} element={<Player films={films}/>}/>
-        <Route path={RoutesEnum.Default} element={<NotFound/>}/>
+        <Route path='*' element={<NotFound/>}/>
       </Routes>
     </BrowserRouter>
   );

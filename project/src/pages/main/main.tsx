@@ -1,6 +1,5 @@
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/page-footer/page-footer';
-import {Film} from '../../types/film';
 import FilmsList from '../../components/films-list/films-list';
 import {RoutesEnum} from '../../types/routes';
 import {Link} from 'react-router-dom';
@@ -13,12 +12,8 @@ import UserBlock from '../../components/user-block/user-block';
 
 const SHOW_MORE_STEP_COUNT = 8;
 
-export type MainProps = {
-  promoFilm: Film;
-}
-
-function MainPage(props: MainProps) {
-  const { films, currentGenre } = useAppSelector((state) => state);
+function MainPage() {
+  const { films, currentGenre, promoFilm } = useAppSelector((state) => state);
   const [showedFilmsCount, setShowedFilmsCount] = useState(SHOW_MORE_STEP_COUNT);
   const filmsFiltered = films
     .filter((film) => film.genre === currentGenre || currentGenre === ALL_GENRES)
@@ -33,7 +28,7 @@ function MainPage(props: MainProps) {
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={props.promoFilm.backgroundImage} alt={props.promoFilm.name}/>
+          <img src={promoFilm?.backgroundImage} alt={promoFilm?.name}/>
         </div>
         <h1 className="visually-hidden">WTW</h1>
 
@@ -45,18 +40,18 @@ function MainPage(props: MainProps) {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={props.promoFilm.posterImage} alt={props.promoFilm.name} width="218" height="327"/>
+              <img src={promoFilm?.posterImage} alt={promoFilm?.name} width="218" height="327"/>
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{props.promoFilm.name}</h2>
+              <h2 className="film-card__title">{promoFilm?.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{props.promoFilm.genre}</span>
-                <span className="film-card__year">{props.promoFilm.released}</span>
+                <span className="film-card__genre">{promoFilm?.genre}</span>
+                <span className="film-card__year">{promoFilm?.released}</span>
               </p>
 
               <div className="film-card__buttons">
-                <Link to={`/player/${props.promoFilm.id}`} className="btn btn--play film-card__button">
+                <Link to={`player/${promoFilm?.id}`} className="btn btn--play film-card__button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"/>
                   </svg>
@@ -69,7 +64,7 @@ function MainPage(props: MainProps) {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </Link>
-                <Link to={`/films/${props.promoFilm.id}/review`} className="btn film-card__button">Add review</Link>
+                <Link to={`films/${promoFilm?.id}/review`} className="btn film-card__button">Add review</Link>
               </div>
             </div>
           </div>

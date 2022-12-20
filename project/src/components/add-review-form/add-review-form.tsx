@@ -1,13 +1,38 @@
-import {useState} from 'react';
+import {FormEvent, useState} from 'react';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {useNavigate} from 'react-router-dom';
+import {postComment} from '../../store/api-actions';
+import {UserComment} from '../../types/user-comment';
 
 function AddReviewForm() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { currentFilm } = useAppSelector((state) => state);
   const [rating, setRating] = useState({
     ratingStars: 0,
     reviewText: '',
   });
 
+  const onSubmit = (review: UserComment) => {
+    dispatch(postComment({comment: review.comment, rating: review.rating, filmId: currentFilm?.id}));
+    navigate(`/films/${currentFilm?.id}`);
+  };
+
+  const handleOnSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    const review: UserComment = {
+      filmId: currentFilm?.id,
+      rating: rating.ratingStars,
+      comment: rating.reviewText
+    };
+    if (rating.ratingStars && rating.reviewText) {
+      onSubmit(review);
+    }
+  };
+
   return (
-    <form action="#" className="add-review__form">
+    <form action="#" className="add-review__form" onSubmit={handleOnSubmit}>
       <div className="rating">
         <div className="rating__stars">
           {[...Array(10)].map((_, index) => (
