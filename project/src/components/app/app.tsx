@@ -10,9 +10,13 @@ import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 import {useAppSelector} from '../../hooks';
 import LoadingSpinner from '../loading-spinner/loading-spinner';
+import {getFilms, getIsDataLoaded} from '../../store/main-reducer/main-selectors';
+import {getAuthorizationStatus} from '../../store/user-reducer/user-selectors';
 
 function App(): JSX.Element {
-  const { isDataLoaded, films, authorizationStatus } = useAppSelector((state) => state);
+  const isDataLoaded = useAppSelector(getIsDataLoaded);
+  const films = useAppSelector(getFilms);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   if (!isDataLoaded){
     return <LoadingSpinner/>;
