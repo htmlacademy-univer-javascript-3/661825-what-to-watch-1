@@ -9,11 +9,15 @@ import {ALL_GENRES} from '../../types/genres';
 import {useState} from 'react';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import UserBlock from '../../components/user-block/user-block';
+import {getCurrentGenre, getFilms, getPromoFilm} from '../../store/main-reducer/main-selectors';
 
 const SHOW_MORE_STEP_COUNT = 8;
 
 function MainPage() {
-  const { films, currentGenre, promoFilm } = useAppSelector((state) => state);
+  const films = useAppSelector(getFilms);
+  const currentGenre = useAppSelector(getCurrentGenre);
+  const promoFilm = useAppSelector(getPromoFilm);
+
   const [showedFilmsCount, setShowedFilmsCount] = useState(SHOW_MORE_STEP_COUNT);
   const filmsFiltered = films
     .filter((film) => film.genre === currentGenre || currentGenre === ALL_GENRES)
@@ -51,7 +55,7 @@ function MainPage() {
               </p>
 
               <div className="film-card__buttons">
-                <Link to={`player/${promoFilm?.id}`} className="btn btn--play film-card__button">
+                <Link to={`/player/${promoFilm?.id}`} className="btn btn--play film-card__button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"/>
                   </svg>

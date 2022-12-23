@@ -11,10 +11,17 @@ import {fetchFilmById, fetchReviewsById, fetchSimilarById} from '../../store/api
 import NotFound from '../not-found/not-found';
 import {setIsDataLoaded} from '../../store/action';
 import {AuthorizationStatus} from '../../types/auth-status';
+import {getFilms} from '../../store/main-reducer/main-selectors';
+import {getFilm, getReviews, getSimilarFilm} from '../../store/film-reducer/film-selectors';
+import {getAuthorizationStatus} from '../../store/user-reducer/user-selectors';
 
 function FilmPage() {
   const id = Number(useParams().id);
-  const {films, reviews, currentFilm, similarFilms, authorizationStatus} = useAppSelector((state) => state);
+  const films = useAppSelector(getFilms);
+  const reviews = useAppSelector(getReviews);
+  const currentFilm = useAppSelector(getFilm);
+  const similarFilms = useAppSelector(getSimilarFilm);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -55,7 +62,7 @@ function FilmPage() {
 
                 <div className="film-card__buttons">
 
-                  <Link to={`player/${currentFilm.id}`} className="btn btn--play film-card__button">
+                  <Link to={`/player/${currentFilm.id}`} className="btn btn--play film-card__button">
                     <svg viewBox="0 0 19 19" width="19" height="19">
                       <use xlinkHref="#play-s"/>
                     </svg>

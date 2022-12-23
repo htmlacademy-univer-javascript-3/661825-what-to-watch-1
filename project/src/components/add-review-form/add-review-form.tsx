@@ -3,11 +3,12 @@ import {useAppDispatch, useAppSelector} from '../../hooks';
 import {useNavigate} from 'react-router-dom';
 import {postComment} from '../../store/api-actions';
 import {UserComment} from '../../types/user-comment';
+import {getFilm} from '../../store/film-reducer/film-selectors';
 
 function AddReviewForm() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { currentFilm } = useAppSelector((state) => state);
+  const currentFilm = useAppSelector(getFilm);
   const [rating, setRating] = useState({
     ratingStars: 0,
     reviewText: '',
@@ -62,7 +63,9 @@ function AddReviewForm() {
           }}
         />
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit">Post</button>
+          { (rating.reviewText.length < 50 || rating.reviewText.length >= 400)
+            ? <button className="add-review__btn" type="submit" disabled>Post</button>
+            : <button className="add-review__btn" type="submit">Post</button>}
         </div>
       </div>
     </form>

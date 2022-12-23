@@ -7,9 +7,10 @@ import {RoutesEnum} from '../../types/routes';
 import {FormEvent, useRef} from 'react';
 import {loginAction} from '../../store/api-actions';
 import {AuthData} from '../../types/auth-data';
+import {getAuthorizationStatus} from '../../store/user-reducer/user-selectors';
 
 function SignInPage() {
-  const { authorizationStatus } = useAppSelector((state) => state);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const navigate = useNavigate();
 
   if (authorizationStatus === AuthorizationStatus.Auth){

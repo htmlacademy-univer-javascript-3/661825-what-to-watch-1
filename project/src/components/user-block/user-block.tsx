@@ -4,12 +4,13 @@ import React from 'react';
 import {AuthorizationStatus} from '../../types/auth-status';
 import {Link} from 'react-router-dom';
 import {RoutesEnum} from '../../types/routes';
+import {getAuthorizationStatus, getUser} from '../../store/user-reducer/user-selectors';
 
-export type AuthorizatedUserProps = {
+export type AuthorizedUserProps = {
   avatarLink: string;
 }
 
-function AuthorizatedUser(props: AuthorizatedUserProps) {
+function AuthorizatedUser(props: AuthorizedUserProps) {
   const { avatarLink } = props;
   const dispatch = useAppDispatch();
 
@@ -33,14 +34,15 @@ function AuthorizatedUser(props: AuthorizatedUserProps) {
 }
 
 function UserBlock() {
-  const { authorizationStatus } = useAppSelector((state) => state);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const user = useAppSelector(getUser);
 
   return (
     <ul className="user-block">
       {authorizationStatus === AuthorizationStatus.Auth
-        ? <AuthorizatedUser avatarLink={'img/avatar.jpg'} />
+        ? <AuthorizatedUser avatarLink={`${user?.avatarUrl}`} />
         : <Link to={RoutesEnum.Login} className='user-block__link'>Sign in</Link>}
     </ul>
   );
 }
-export default UserBlock;
+export default React.memo(UserBlock);
