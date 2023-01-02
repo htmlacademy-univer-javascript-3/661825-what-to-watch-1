@@ -29,7 +29,7 @@ function App(): JSX.Element {
         <Route path={RoutesEnum.Login} element={<SignInPage/>}/>
         <Route path={RoutesEnum.MyList} element={
           <PrivateRoute authorizationStatus={authorizationStatus}>
-            <MyListPage films={films}/>
+            <MyListPage/>
           </PrivateRoute>
         }
         />
@@ -40,7 +40,7 @@ function App(): JSX.Element {
           </PrivateRoute>
         }
         />
-        <Route path={RoutesEnum.Player} element={<Player films={films}/>}/>
+        <Route path={RoutesEnum.Player} element={<Player/>}/>
         <Route path='*' element={<NotFound/>}/>
       </Routes>
     </BrowserRouter>

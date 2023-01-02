@@ -4,18 +4,6 @@ import {AuthorizationStatus} from './auth-status';
 import {ReviewType} from './review';
 import {User} from './user';
 
-export type AppState = {
-  films: Film[],
-  reviews: ReviewType[],
-  currentFilm: Film | null,
-  promoFilm: Film | null,
-  similarFilms: Film[],
-  currentGenre: string,
-  isDataLoaded: boolean,
-  authorizationStatus: AuthorizationStatus,
-  error: string | null
-}
-
 export type FilmState = {
   film: Film | null,
   reviews: ReviewType[],
@@ -24,9 +12,10 @@ export type FilmState = {
 
 export type MainState = {
   films: Film[],
-  promoFilm: Film | null,
+  promoFilm: Film|null,
   currentGenre: string,
   isDataLoaded: boolean,
+  favoriteFilms: Film[],
   error: string | null
 }
 

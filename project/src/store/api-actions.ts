@@ -1,5 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {AppDispatch, AppState, State} from '../types/store';
+import {AppDispatch, State} from '../types/store';
 import {AxiosInstance} from 'axios';
 import {
   setError,
@@ -23,6 +23,35 @@ export const fetchFilmsAction = createAsyncThunk<Film[], undefined, {
     return data;
   },
 );
+
+export const getFavoriteFilmsAction = createAsyncThunk<Film[], undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/getFavoriteFilms',
+  async (_arg, { extra: api}) => {
+    const { data } = await api.get<Film[]>(ApiRoutesEnum.Favorite);
+    return data;
+  },
+);
+
+export const setFavoriteFilmAction = createAsyncThunk<
+  Film,
+  { id: number; status: number },
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+  >(
+    'films/setFavorite',
+    async ({ id, status }, { extra: api }) => {
+      const { data } = await api.post<Film>(`${ApiRoutesEnum.Favorite}/${id}/${status}`);
+      return data;
+    }
+  );
+
 
 export const fetchFilmById = createAsyncThunk<Film, number, {
     dispatch: AppDispatch;
@@ -66,17 +95,6 @@ export const fetchPromoFilm = createAsyncThunk<Film, undefined, {
   return data;
 });
 
-export const fetchFavoriteFilms = createAsyncThunk<Film[], undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>('fetchFavoriteFilm', async(_arg, {extra: api}) => {
-  const {data} = await api.get<Film[]>(
-    `${ApiRoutesEnum.Favorite}`
-  );
-  return data;
-});
-
 export const postComment = createAsyncThunk<void, UserComment, {
   dispatch: AppDispatch;
   state: State;
@@ -89,7 +107,7 @@ export const postComment = createAsyncThunk<void, UserComment, {
 );
 
 export const clearErrorAction = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch; state: AppState; extra: AxiosInstance }>(
+  dispatch: AppDispatch; state: State; extra: AxiosInstance }>(
     'clearError', async (_arg, { dispatch }) => {
       setTimeout(() => {
         dispatch(setError(null));

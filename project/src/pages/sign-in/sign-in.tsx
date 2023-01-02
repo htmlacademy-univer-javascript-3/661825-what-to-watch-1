@@ -35,6 +35,8 @@ function SignInPage() {
         password: passwordRef.current.value,
       });
     }
+
+    navigate(RoutesEnum.Main);
   };
 
   return (
