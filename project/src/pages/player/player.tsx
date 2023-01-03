@@ -49,8 +49,8 @@ function Player() {
 
   const getTimeLeftInFormat = (seconds: number) => {
     if (seconds / 60 / 60 >= 1) {
-      return moment(seconds * 1000).format('-HH:MM:SS');}
-    return moment(seconds * 1000).format('-MM:SS');
+      return moment(seconds * 1000).format('-hh:mm:ss');}
+    return moment(seconds * 1000).format('-mm:ss');
   };
 
   if (!film) {
