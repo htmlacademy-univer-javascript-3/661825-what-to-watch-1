@@ -4,10 +4,13 @@ import {useNavigate} from 'react-router-dom';
 import {postComment} from '../../store/api-actions';
 import {UserComment} from '../../types/user-comment';
 import {getFilm} from '../../store/film-reducer/film-selectors';
+import {setError} from '../../store/action';
+import {getError} from '../../store/main-reducer/main-selectors';
 
 function AddReviewForm() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const error = useAppSelector(getError);
   const currentFilm = useAppSelector(getFilm);
   const [rating, setRating] = useState({
     ratingStars: 0,
@@ -15,8 +18,12 @@ function AddReviewForm() {
   });
 
   const onSubmit = (review: UserComment) => {
-    dispatch(postComment({comment: review.comment, rating: review.rating, filmId: currentFilm?.id}));
-    navigate(`/films/${currentFilm?.id}`);
+    try {
+      dispatch(postComment({comment: review.comment, rating: review.rating, filmId: currentFilm?.id}));
+      dispatch(setError(null));
+    } catch {
+      dispatch(setError('Can\'t post a form'));
+    }
   };
 
   const handleOnSubmit = (evt: FormEvent<HTMLFormElement>) => {
@@ -29,6 +36,7 @@ function AddReviewForm() {
     };
     if (rating.ratingStars && rating.reviewText) {
       onSubmit(review);
+      navigate(`/films/${currentFilm?.id}`);
     }
   };
 
@@ -63,10 +71,11 @@ function AddReviewForm() {
           }}
         />
         <div className="add-review__submit">
-          { (rating.reviewText.length < 50 || rating.reviewText.length >= 400)
+          { (rating.reviewText.length < 50 || rating.reviewText.length >= 400 || rating.ratingStars === 0)
             ? <button className="add-review__btn" type="submit" disabled>Post</button>
             : <button className="add-review__btn" type="submit">Post</button>}
         </div>
+        { error ? <p>{error}</p> : null}
       </div>
     </form>
   );

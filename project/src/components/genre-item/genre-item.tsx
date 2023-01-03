@@ -1,5 +1,6 @@
 import { useAppDispatch } from '../../hooks';
 import { changeGenre } from '../../store/action';
+import React from 'react';
 
 export type GenreProps = {
   genre: string;

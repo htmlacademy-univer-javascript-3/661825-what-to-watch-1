@@ -1,19 +1,23 @@
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/page-footer/page-footer';
 import FilmsList from '../../components/films-list/films-list';
-import {RoutesEnum} from '../../types/routes';
 import {Link} from 'react-router-dom';
 import {useAppSelector} from '../../hooks';
 import GenresList from '../../components/genres-list/genres-list';
 import {ALL_GENRES} from '../../types/genres';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import UserBlock from '../../components/user-block/user-block';
 import {getCurrentGenre, getFilms, getPromoFilm} from '../../store/main-reducer/main-selectors';
+import MyListButton from '../../components/my-list-button/my-list-button';
+import {AuthorizationStatus} from '../../types/auth-status';
+import {getAuthorizationStatus} from '../../store/user-reducer/user-selectors';
+import PlayButton from '../../components/play-pause-button/play-button';
 
 const SHOW_MORE_STEP_COUNT = 8;
 
 function MainPage() {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const films = useAppSelector(getFilms);
   const currentGenre = useAppSelector(getCurrentGenre);
   const promoFilm = useAppSelector(getPromoFilm);
@@ -56,19 +60,9 @@ function MainPage() {
 
               <div className="film-card__buttons">
                 <Link to={`/player/${promoFilm?.id}`} className="btn btn--play film-card__button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"/>
-                  </svg>
-                  <span>Play</span>
+                  <PlayButton/>
                 </Link>
-                <Link to={RoutesEnum.MyList} className="btn btn--list film-card__button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"/>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </Link>
-                <Link to={`films/${promoFilm?.id}/review`} className="btn film-card__button">Add review</Link>
+                { authorizationStatus === AuthorizationStatus.Auth ? <MyListButton film={promoFilm}/> : null }
               </div>
             </div>
           </div>
@@ -80,7 +74,11 @@ function MainPage() {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenresList genres={genres} activeGenre={currentGenre}/>
           <FilmsList films={filmsFiltered}/>
-          <ShowMoreButton onClick={handleShowMoreOnClick}/>
+          {
+            showedFilmsCount + SHOW_MORE_STEP_COUNT < films.length
+              ? <ShowMoreButton onClick={handleShowMoreOnClick}/>
+              : null
+          }
         </section>
 
         <Footer/>

@@ -10,7 +10,7 @@ export type AuthorizedUserProps = {
   avatarLink: string;
 }
 
-function AuthorizatedUser(props: AuthorizedUserProps) {
+function AuthorizedUser(props: AuthorizedUserProps) {
   const { avatarLink } = props;
   const dispatch = useAppDispatch();
 
@@ -23,7 +23,9 @@ function AuthorizatedUser(props: AuthorizedUserProps) {
     <>
       <li className="user-block__item">
         <div className="user-block__avatar">
-          <img src={avatarLink} alt="User avatar" width="63" height="63" />
+          <Link to={RoutesEnum.MyList}>
+            <img src={avatarLink} alt="User avatar" width="63" height="63" />
+          </Link>
         </div>
       </li>
       <li className="user-block__item">
@@ -40,7 +42,7 @@ function UserBlock() {
   return (
     <ul className="user-block">
       {authorizationStatus === AuthorizationStatus.Auth
-        ? <AuthorizatedUser avatarLink={`${user?.avatarUrl}`} />
+        ? <AuthorizedUser avatarLink={`${user?.avatarUrl}`} />
         : <Link to={RoutesEnum.Login} className='user-block__link'>Sign in</Link>}
     </ul>
   );

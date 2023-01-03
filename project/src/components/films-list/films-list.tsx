@@ -9,7 +9,7 @@ type FilmsListProps = {
 function FilmsList({films}: FilmsListProps): JSX.Element {
   const [activeFilm, setActiveFilm] = useState<Film | null>(null);
 
-  const handleMouseOver = (film: Film) => {
+  const handleMouseEnter = (film: Film) => {
     if (film !== activeFilm) {
       setActiveFilm(film);
     }
@@ -17,7 +17,7 @@ function FilmsList({films}: FilmsListProps): JSX.Element {
 
   return (
     <div className='catalog__films-list'>
-      {films.map((film) => <FilmCard key={film.id} film={film} onMouseOver={handleMouseOver}/>)}
+      {films.map((film) => <FilmCard key={film.id} film={film} onMouseEnter={handleMouseEnter}/>)}
     </div>
   );
 }

@@ -16,7 +16,7 @@ function FilmDetails(props: FilmDetailsProps) {
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
-          <span className="film-card__details-value">{film.starring}</span>
+          <span className="film-card__details-value">{film.starring.join(', ')}</span>
         </p>
       </div>
 

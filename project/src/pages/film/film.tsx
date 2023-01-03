@@ -1,7 +1,6 @@
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/page-footer/page-footer';
 import {Link, useParams} from 'react-router-dom';
-import {RoutesEnum} from '../../types/routes';
 import FilmsList from '../../components/films-list/films-list';
 import React, {useEffect} from 'react';
 import FilmTabs from '../../components/film-tabs/film-tabs';
@@ -11,13 +10,12 @@ import {fetchFilmById, fetchReviewsById, fetchSimilarById} from '../../store/api
 import NotFound from '../not-found/not-found';
 import {setIsDataLoaded} from '../../store/action';
 import {AuthorizationStatus} from '../../types/auth-status';
-import {getFilms} from '../../store/main-reducer/main-selectors';
 import {getFilm, getReviews, getSimilarFilm} from '../../store/film-reducer/film-selectors';
 import {getAuthorizationStatus} from '../../store/user-reducer/user-selectors';
+import MyListButton from '../../components/my-list-button/my-list-button';
 
 function FilmPage() {
   const id = Number(useParams().id);
-  const films = useAppSelector(getFilms);
   const reviews = useAppSelector(getReviews);
   const currentFilm = useAppSelector(getFilm);
   const similarFilms = useAppSelector(getSimilarFilm);
@@ -61,22 +59,13 @@ function FilmPage() {
                 </p>
 
                 <div className="film-card__buttons">
-
                   <Link to={`/player/${currentFilm.id}`} className="btn btn--play film-card__button">
                     <svg viewBox="0 0 19 19" width="19" height="19">
                       <use xlinkHref="#play-s"/>
                     </svg>
                     <span>Play</span>
                   </Link>
-
-                  <Link to={RoutesEnum.MyList} className="btn btn--list film-card__button">
-                    <svg viewBox="0 0 19 20" width="19" height="20">
-                      <use xlinkHref="#add"/>
-                    </svg>
-                    <span>My list</span>
-                    <span className="film-card__count">{films.length}</span>
-                  </Link>
-
+                  { authorizationStatus === AuthorizationStatus.Auth ? <MyListButton film={currentFilm}/> : null }
                   {
                     authorizationStatus === AuthorizationStatus.Auth
                       ? <Link to={`/films/${currentFilm.id}/review`} className="btn film-card__button">Add review</Link>

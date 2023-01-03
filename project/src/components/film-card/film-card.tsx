@@ -7,11 +7,11 @@ const TIME_TO_TIMEOUT = 1000;
 
 export type FilmCardProps = {
   film: Film,
-  onMouseOver: (film: Film) => void
+  onMouseEnter: (film: Film) => void
 }
 
 function FilmCard(props: FilmCardProps) {
-  const {film, onMouseOver} = props;
+  const {film, onMouseEnter} = props;
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isNeedVideoToPlay, setIsNeedVideoToPlay] = useState(false);
 
@@ -33,10 +33,11 @@ function FilmCard(props: FilmCardProps) {
   };
 
   return (
-    <article
-      className="small-film-card catalog__films-card"
-      onMouseOver={(evt) => {
-        onMouseOver(film);
+    <Link
+      to={`/films/${film.id}`}
+      className="small-film-card catalog__films-card small-film-card__link"
+      onMouseEnter={(evt) => {
+        onMouseEnter(film);
         setIsNeedVideoToPlay(true);
       }}
       onMouseLeave={handleMouseLeave}
@@ -44,10 +45,8 @@ function FilmCard(props: FilmCardProps) {
       <div className="small-film-card__image">
         <VideoPlayer width={280} height={175} film={film} isPlaying={isVideoPlaying} muted/>
       </div>
-      <h3 className="small-film-card__title">
-        <Link to={`/films/${film.id}`} className='small-film-card__link'>{film.name}</Link>
-      </h3>
-    </article>
+      <h3 className="small-film-card__title">{film.name}</h3>
+    </Link>
   );
 }
 
