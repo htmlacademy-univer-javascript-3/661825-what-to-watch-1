@@ -3,8 +3,14 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import {Provider} from 'react-redux';
 import {store} from './store';
-import {checkAuthAction, fetchFilmsAction, fetchPromoFilm, getFavoriteFilmsAction} from './store/api-actions';
+import {
+  checkAuthAction,
+  fetchFilmsAction,
+  fetchPromoFilm,
+  getFavoriteFilmsAction
+} from './store/api-actions';
 
+store.dispatch(checkAuthAction());
 store.dispatch(fetchFilmsAction());
 store.dispatch(fetchPromoFilm());
 store.dispatch(checkAuthAction());

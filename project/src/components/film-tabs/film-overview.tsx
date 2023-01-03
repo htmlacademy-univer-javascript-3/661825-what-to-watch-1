@@ -42,7 +42,7 @@ function FilmOverview(props: FilmOverviewProps) {
       <div className="film-card__text">
         {props.film.description}
         <p className="film-card__director"><strong>Director: {props.film.director}</strong></p>
-        <p className="film-card__starring"><strong>Starring: {props.film.starring.join(',')}</strong></p>
+        <p className="film-card__starring"><strong>Starring: {props.film.starring.join(', ')}</strong></p>
       </div>
     </>
   );

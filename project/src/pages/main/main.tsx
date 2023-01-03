@@ -74,7 +74,11 @@ function MainPage() {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenresList genres={genres} activeGenre={currentGenre}/>
           <FilmsList films={filmsFiltered}/>
-          <ShowMoreButton onClick={handleShowMoreOnClick}/>
+          {
+            showedFilmsCount + SHOW_MORE_STEP_COUNT < films.length
+              ? <ShowMoreButton onClick={handleShowMoreOnClick}/>
+              : null
+          }
         </section>
 
         <Footer/>
