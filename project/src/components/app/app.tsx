@@ -1,5 +1,5 @@
 import Main from '../../pages/main/main';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import {RoutesEnum} from '../../types/routes';
 import SignInPage from '../../pages/sign-in/sign-in';
 import MyListPage from '../../pages/my-list/my-list';
@@ -23,27 +23,25 @@ function App(): JSX.Element {
   }
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={RoutesEnum.Main} element={<Main/>}/>
-        <Route path={RoutesEnum.Login} element={<SignInPage/>}/>
-        <Route path={RoutesEnum.MyList} element={
-          <PrivateRoute authorizationStatus={authorizationStatus}>
-            <MyListPage/>
-          </PrivateRoute>
-        }
-        />
-        <Route path={RoutesEnum.Film} element={<FilmPage/>}/>
-        <Route path={RoutesEnum.AddReview} element={
-          <PrivateRoute authorizationStatus={authorizationStatus}>
-            <AddReviewPage films={films}/>
-          </PrivateRoute>
-        }
-        />
-        <Route path={RoutesEnum.Player} element={<Player/>}/>
-        <Route path='*' element={<NotFound/>}/>
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path={RoutesEnum.Main} element={<Main/>}/>
+      <Route path={RoutesEnum.Login} element={<SignInPage/>}/>
+      <Route path={RoutesEnum.MyList} element={
+        <PrivateRoute authorizationStatus={authorizationStatus}>
+          <MyListPage/>
+        </PrivateRoute>
+      }
+      />
+      <Route path={RoutesEnum.Film} element={<FilmPage/>}/>
+      <Route path={RoutesEnum.AddReview} element={
+        <PrivateRoute authorizationStatus={authorizationStatus}>
+          <AddReviewPage films={films}/>
+        </PrivateRoute>
+      }
+      />
+      <Route path={RoutesEnum.Player} element={<Player/>}/>
+      <Route path='*' element={<NotFound/>}/>
+    </Routes>
   );
 }
 

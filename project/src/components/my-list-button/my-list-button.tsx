@@ -1,5 +1,5 @@
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {getFavoriteFilms} from '../../store/main-reducer/main-selectors';
+import {getFavoriteFilms, getPromoFilm} from '../../store/main-reducer/main-selectors';
 import React from 'react';
 import {fetchPromoFilm, getFavoriteFilmsAction, setFavoriteFilmAction} from '../../store/api-actions';
 import {Film} from '../../types/film';
@@ -12,13 +12,16 @@ function MyListButton(props: MyListButtonProps) {
   const {film} = props;
   const dispatch = useAppDispatch();
   const favoriteFilms = useAppSelector(getFavoriteFilms);
+  const promoFilm = useAppSelector(getPromoFilm);
 
   const favoriteAddHandler = () => {
     const status = Number(!film?.isFavorite);
     const filmId = Number(film?.id);
     dispatch(setFavoriteFilmAction({ id: filmId, status: status }));
     dispatch(getFavoriteFilmsAction());
-    dispatch(fetchPromoFilm());
+    if (film?.id === promoFilm?.id) {
+      dispatch(fetchPromoFilm());
+    }
   };
 
   return (

@@ -12,7 +12,7 @@ import {getCurrentGenre, getFilms, getPromoFilm} from '../../store/main-reducer/
 import MyListButton from '../../components/my-list-button/my-list-button';
 import {AuthorizationStatus} from '../../types/auth-status';
 import {getAuthorizationStatus} from '../../store/user-reducer/user-selectors';
-import PlayButton from '../../components/play-pause-button/play-button';
+import PlayerButton from '../../components/player-button/player-button';
 
 const SHOW_MORE_STEP_COUNT = 8;
 
@@ -21,8 +21,8 @@ function MainPage() {
   const films = useAppSelector(getFilms);
   const currentGenre = useAppSelector(getCurrentGenre);
   const promoFilm = useAppSelector(getPromoFilm);
-
   const [showedFilmsCount, setShowedFilmsCount] = useState(SHOW_MORE_STEP_COUNT);
+
   const filmsFiltered = films
     .filter((film) => film.genre === currentGenre || currentGenre === ALL_GENRES)
     .slice(0, showedFilmsCount);
@@ -60,7 +60,7 @@ function MainPage() {
 
               <div className="film-card__buttons">
                 <Link to={`/player/${promoFilm?.id}`} className="btn btn--play film-card__button">
-                  <PlayButton/>
+                  <PlayerButton isPlay/>
                 </Link>
                 { authorizationStatus === AuthorizationStatus.Auth ? <MyListButton film={promoFilm}/> : null }
               </div>

@@ -14,10 +14,10 @@ function FilmReviews(props: FilmReviewsProps) {
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        {reviewHalf.map((review) => <Review key={review.id} review={review}/>)}
+        {review2Half.map((review) => <Review key={review.id} review={review}/>)}
       </div>
       <div className="film-card__reviews-col">
-        {review2Half.map((review) => <Review key={review.id} review={review}/>)}
+        {reviewHalf.map((review) => <Review key={review.id} review={review}/>)}
       </div>
     </div>
   );
