@@ -1,9 +1,7 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/store';
 import {AxiosInstance} from 'axios';
-import {
-  setError,
-} from './action';
+import {setError} from './action';
 import {Film} from '../types/film';
 import {ApiRoutesEnum} from '../types/routes';
 import {AuthData} from '../types/auth-data';

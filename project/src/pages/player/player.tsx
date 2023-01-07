@@ -1,11 +1,10 @@
 import {Link, Navigate, useParams} from 'react-router-dom';
 import {RoutesEnum} from '../../types/routes';
-import PlayButton from '../../components/play-pause-button/play-button';
+import PlayerButton from '../../components/player-button/player-button';
 import {getFilm} from '../../store/film-reducer/film-selectors';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {useEffect, useRef, useState} from 'react';
 import {fetchFilmById} from '../../store/api-actions';
-import PauseButton from '../../components/play-pause-button/pause-button';
 import moment from 'moment';
 
 function Player() {
@@ -65,7 +64,6 @@ function Player() {
         src={film.videoLink}
         className="player__video"
         poster={film.backgroundImage}
-
       />
       <Link to={`/films/${film.id}`} type='button' className='player__exit'>Exit</Link>
 
@@ -81,7 +79,7 @@ function Player() {
 
         <div className="player__controls-row">
           <button type="button" className="player__play" onClick={handleIsPlayClick}>
-            { isPlaying ? <PauseButton/> : <PlayButton/> }
+            <PlayerButton isPlay={!isPlaying}/>
           </button>
           <div className="player__name">{film.name}</div>
 

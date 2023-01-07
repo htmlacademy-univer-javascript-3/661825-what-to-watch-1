@@ -9,6 +9,7 @@ import {
   fetchPromoFilm,
   getFavoriteFilmsAction
 } from './store/api-actions';
+import {BrowserRouter} from 'react-router-dom';
 
 store.dispatch(checkAuthAction());
 store.dispatch(fetchFilmsAction());
@@ -23,7 +24,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App/>
+      <BrowserRouter>
+        <App/>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
 );
