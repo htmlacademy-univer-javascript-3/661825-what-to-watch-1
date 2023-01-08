@@ -15,7 +15,7 @@ const initialState: MainState = {
 };
 
 export const mainReducer = createSlice({
-  name: NameSpace.Data,
+  name: NameSpace.Main,
   initialState,
   reducers: {},
   extraReducers(builder) {

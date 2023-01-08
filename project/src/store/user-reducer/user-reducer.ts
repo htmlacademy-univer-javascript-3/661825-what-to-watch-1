@@ -5,7 +5,6 @@ import {AuthorizationStatus} from '../../types/auth-status';
 import {checkAuthAction, loginAction, logoutAction} from '../api-actions';
 import {dropToken, saveToken} from '../../services/token';
 
-
 const initialState: UserState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   user: null

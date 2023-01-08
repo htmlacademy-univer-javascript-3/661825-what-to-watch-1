@@ -1,5 +1,4 @@
-import {Link, Navigate, useParams} from 'react-router-dom';
-import {RoutesEnum} from '../../types/routes';
+import {Link, useParams} from 'react-router-dom';
 import PlayerButton from '../../components/player-button/player-button';
 import {getFilm} from '../../store/film-reducer/film-selectors';
 import {useAppDispatch, useAppSelector} from '../../hooks';
@@ -17,8 +16,10 @@ function Player() {
   const [timeLeft, setTimeLeft] = useState(0);
 
   useEffect(() => {
-    dispatch(fetchFilmById(Number(params?.id)));
-  }, [params.id, dispatch]);
+    if (!film) {
+      dispatch(fetchFilmById(Number(params.id)));
+    }
+  }, [film, params.id, dispatch]);
 
   const handleIsPlayClick = () => {
     if (videoRef.current?.paused) {
@@ -52,37 +53,29 @@ function Player() {
     return moment(seconds * 1000).format('-mm:ss');
   };
 
-  if (!film) {
-    return <Navigate to={RoutesEnum.Default}/>;
-  }
-
   return (
     <div className="player">
       <video
         ref={videoRef}
         onTimeUpdate={handleProgressBar}
-        src={film.videoLink}
+        src={film?.videoLink}
         className="player__video"
-        poster={film.backgroundImage}
+        poster={film?.backgroundImage}
       />
-      <Link to={`/films/${film.id}`} type='button' className='player__exit'>Exit</Link>
-
+      <Link to={`/films/${film?.id}`} type='button' className='player__exit'>Exit</Link>
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">
             <progress className="player__progress" value={progressBar} max="100"/>
             <div className="player__toggler" style={{left: `${progressBar}%`}}>Toggler</div>
-
           </div>
           <div className="player__time-value">{getTimeLeftInFormat(timeLeft)}</div>
         </div>
-
         <div className="player__controls-row">
           <button type="button" className="player__play" onClick={handleIsPlayClick}>
             <PlayerButton isPlay={!isPlaying}/>
           </button>
-          <div className="player__name">{film.name}</div>
-
+          <div className="player__name">{film?.name}</div>
           <button type="button" className="player__full-screen" onClick={handleExpandToFullScreenClick}>
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"/>

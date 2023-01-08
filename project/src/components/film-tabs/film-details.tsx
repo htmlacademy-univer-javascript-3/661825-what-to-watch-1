@@ -4,6 +4,17 @@ type FilmDetailsProps = {
   film: Film;
 }
 
+function getRunTimeInFormat(runTime: number): string {
+  const hours = Math.floor(runTime / 60);
+  const minutes = runTime - hours * 60;
+
+  if (hours > 0) {
+    return `${hours}h ${minutes}m`;
+  } else {
+    return `${minutes}m`;
+  }
+}
+
 function FilmDetails(props: FilmDetailsProps) {
   const { film } = props;
 
@@ -23,7 +34,7 @@ function FilmDetails(props: FilmDetailsProps) {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{film.runTime}</span>
+          <span className="film-card__details-value">{getRunTimeInFormat(film.runTime)}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>

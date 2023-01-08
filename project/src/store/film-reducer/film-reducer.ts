@@ -3,7 +3,6 @@ import {createSlice} from '@reduxjs/toolkit';
 import {NameSpace} from '../../const';
 import {fetchFilmById, fetchPromoFilm, fetchReviewsById, fetchSimilarById, setFavoriteFilmAction} from '../api-actions';
 
-
 const initialState: FilmState = {
   film: null,
   similarFilms: [],

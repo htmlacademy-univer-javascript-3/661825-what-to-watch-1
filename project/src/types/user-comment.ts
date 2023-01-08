@@ -1,5 +1,5 @@
 export type UserComment = {
-  filmId: number|undefined,
+  filmId: number | undefined,
   rating: number,
   comment: string
 }

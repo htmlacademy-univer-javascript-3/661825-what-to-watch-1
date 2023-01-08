@@ -17,7 +17,6 @@ export type FilmTabsProps = {
   reviews: ReviewType[]
 }
 
-
 function FilmTabs(props: FilmTabsProps) {
   const { film, reviews } = props;
   const [activeTab, setActiveTab] = useState(Tabs.Overview);
@@ -25,14 +24,13 @@ function FilmTabs(props: FilmTabsProps) {
   const handleTabClick = (tab: Tabs) => {
     setActiveTab(tab);
   };
-
-  const tabNames = Object.values(Tabs);
+  const tabNamesList = Object.values(Tabs);
 
   return (
     <div className="film-card__desc">
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
-          {tabNames.map(
+          {tabNamesList.map(
             (name) => (
               <FilmTabItem
                 key={name}
