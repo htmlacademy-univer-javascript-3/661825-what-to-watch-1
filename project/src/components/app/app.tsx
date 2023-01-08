@@ -11,12 +11,10 @@ import PrivateRoute from '../private-route/private-route';
 import {useAppSelector} from '../../hooks';
 import LoadingSpinner from '../loading-spinner/loading-spinner';
 import {getFilms, getIsDataLoaded} from '../../store/main-reducer/main-selectors';
-import {getAuthorizationStatus} from '../../store/user-reducer/user-selectors';
 
 function App(): JSX.Element {
   const isDataLoaded = useAppSelector(getIsDataLoaded);
   const films = useAppSelector(getFilms);
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   if (!isDataLoaded){
     return <LoadingSpinner/>;
@@ -27,14 +25,14 @@ function App(): JSX.Element {
       <Route path={RoutesEnum.Main} element={<Main/>}/>
       <Route path={RoutesEnum.Login} element={<SignIn/>}/>
       <Route path={RoutesEnum.MyList} element={
-        <PrivateRoute authorizationStatus={authorizationStatus}>
+        <PrivateRoute>
           <MyList/>
         </PrivateRoute>
       }
       />
       <Route path={RoutesEnum.Film} element={<Film/>}/>
       <Route path={RoutesEnum.AddReview} element={
-        <PrivateRoute authorizationStatus={authorizationStatus}>
+        <PrivateRoute>
           <AddReview films={films}/>
         </PrivateRoute>
       }

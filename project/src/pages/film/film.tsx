@@ -83,9 +83,7 @@ function Film() {
         <div className="page-content">
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
-            <div className="catalog__films-list">
-              <FilmsList films={similarFilms.slice(0, 4)}/>
-            </div>
+            <FilmsList films={similarFilms.slice(0, 4)}/>
           </section>
           <Footer/>
         </div>
