@@ -2,9 +2,10 @@ import {Link} from 'react-router-dom';
 
 function NotFound() {
   return (
-    <div style={{margin: '20% 30%'}}>
+    <div style={{margin: '20% 30%', lineHeight: 1.1}}>
+      <h3 style={{color:'#cbcbcb'}}>404 Not Found</h3>
       <h1>Такой страницы нет, поищите другую :(</h1>
-      <p>Ну или сходите <Link to={'/'}>на главную</Link></p>
+      <p>Или вернитесь <Link to={'/'}>на главную →</Link></p>
     </div>
   );
 }

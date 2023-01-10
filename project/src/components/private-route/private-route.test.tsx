@@ -18,7 +18,7 @@ describe('Component\'s Tests: Private Route', () => {
         authorizationStatus: AuthorizationStatus.NoAuth,
         user: null
       },
-      DATA: {
+      MAIN: {
         isDataLoaded: true
       }
     });

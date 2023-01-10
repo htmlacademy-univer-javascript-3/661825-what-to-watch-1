@@ -10,7 +10,7 @@ import {AuthorizationStatus} from '../../types/auth-status';
 import {getFavoriteFilmsAction} from '../../store/api-actions';
 
 
-function MyListPage() {
+function MyList() {
   const favoriteFilms = useAppSelector(getFavoriteFilms);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
@@ -31,15 +31,13 @@ function MyListPage() {
         </h1>
         <UserBlock/>
       </header>
-
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
         <FilmsList films={favoriteFilms}/>
       </section>
-
       <Footer/>
     </div>
   );
 }
 
-export default MyListPage;
+export default MyList;

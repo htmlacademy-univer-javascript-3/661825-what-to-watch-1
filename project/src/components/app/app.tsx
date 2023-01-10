@@ -1,10 +1,10 @@
 import Main from '../../pages/main/main';
 import { Route, Routes } from 'react-router-dom';
 import {RoutesEnum} from '../../types/routes';
-import SignInPage from '../../pages/sign-in/sign-in';
-import MyListPage from '../../pages/my-list/my-list';
-import FilmPage from '../../pages/film/film';
-import AddReviewPage from '../../pages/add-review/add-review';
+import SignIn from '../../pages/sign-in/sign-in';
+import MyList from '../../pages/my-list/my-list';
+import Film from '../../pages/film/film';
+import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
@@ -23,17 +23,17 @@ function App(): JSX.Element {
   return (
     <Routes>
       <Route path={RoutesEnum.Main} element={<Main/>}/>
-      <Route path={RoutesEnum.Login} element={<SignInPage/>}/>
+      <Route path={RoutesEnum.Login} element={<SignIn/>}/>
       <Route path={RoutesEnum.MyList} element={
         <PrivateRoute>
-          <MyListPage/>
+          <MyList/>
         </PrivateRoute>
       }
       />
-      <Route path={RoutesEnum.Film} element={<FilmPage/>}/>
+      <Route path={RoutesEnum.Film} element={<Film/>}/>
       <Route path={RoutesEnum.AddReview} element={
         <PrivateRoute>
-          <AddReviewPage films={films}/>
+          <AddReview films={films}/>
         </PrivateRoute>
       }
       />

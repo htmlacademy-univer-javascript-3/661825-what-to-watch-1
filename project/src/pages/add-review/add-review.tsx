@@ -9,23 +9,20 @@ type AddReviewProps = {
   films: Film[];
 }
 
-function AddReviewPage({films}: AddReviewProps) {
+function AddReview({films}: AddReviewProps) {
   const id = Number(useParams().id);
   const film = films.find((curFilm) => curFilm.id === id);
 
   if (!film) {
     return <Navigate to={RoutesEnum.Default}/>;
   }
-
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
           <img src={film.backgroundImage} alt={film.name}/>
         </div>
-
         <h1 className="visually-hidden">WTW</h1>
-
         <header className="page-header">
           <Logo className={'logo__link'}/>
           <nav className="breadcrumbs">
@@ -40,18 +37,15 @@ function AddReviewPage({films}: AddReviewProps) {
           </nav>
           <UserBlock/>
         </header>
-
         <div className="film-card__poster film-card__poster--small">
           <img src={film.posterImage} alt={film.name} width="218" height="327"/>
         </div>
       </div>
-
       <div className="add-review">
         <AddReviewForm/>
       </div>
-
     </section>
   );
 }
 
-export default AddReviewPage;
+export default AddReview;

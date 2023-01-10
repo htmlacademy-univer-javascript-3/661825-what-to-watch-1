@@ -1,7 +1,7 @@
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/page-footer/page-footer';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {useNavigate} from 'react-router-dom';
+import {Navigate, useNavigate} from 'react-router-dom';
 import {AuthorizationStatus} from '../../types/auth-status';
 import {RoutesEnum} from '../../types/routes';
 import {FormEvent, useRef, useState} from 'react';
@@ -10,16 +10,13 @@ import {AuthData} from '../../types/auth-data';
 import {getAuthorizationStatus} from '../../store/user-reducer/user-selectors';
 
 
-function SignInPage() {
+function SignIn() {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const navigate = useNavigate();
   const [isError, setIsError] = useState<boolean>(false);
   const isSignInMessage = false;
   const isValidPassword = (password: string): boolean => /\d+[a-zA-Z]+|[a-zA-Z]+\d+/.test(password);
 
-  if (authorizationStatus === AuthorizationStatus.Auth){
-    navigate(RoutesEnum.Main);
-  }
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
@@ -43,6 +40,9 @@ function SignInPage() {
     }
   };
 
+  if (authorizationStatus === AuthorizationStatus.Auth){
+    return <Navigate to={RoutesEnum.Main}/>;
+  }
   return (
     <body>
       <div className="user-page">
@@ -50,7 +50,6 @@ function SignInPage() {
           <Logo className={'logo__link'}/>
           <h1 className="page-title user-page__title">Sign in</h1>
         </header>
-
         <div className="sign-in user-page__content">
           <form action="#" className="sign-in__form" onSubmit={handleFormSubmit}>
             <div className="sign-in__message">
@@ -98,6 +97,6 @@ function SignInPage() {
   );
 }
 
-export default SignInPage;
+export default SignIn;
 
 

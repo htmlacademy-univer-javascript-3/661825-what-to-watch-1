@@ -14,7 +14,7 @@ import {getFilm, getReviews, getSimilarFilm} from '../../store/film-reducer/film
 import {getAuthorizationStatus} from '../../store/user-reducer/user-selectors';
 import MyListButton from '../../components/my-list-button/my-list-button';
 
-function FilmPage() {
+function Film() {
   const id = Number(useParams().id);
   const reviews = useAppSelector(getReviews);
   const currentFilm = useAppSelector(getFilm);
@@ -32,7 +32,7 @@ function FilmPage() {
     }
   }, [currentFilm, dispatch, id]);
 
-  if (!currentFilm) {
+  if (!currentFilm || currentFilm.id !== id) {
     return <NotFound/>;
   } else {
     return (
@@ -42,14 +42,11 @@ function FilmPage() {
             <div className="film-card__bg">
               <img src={currentFilm.backgroundImage} alt={currentFilm.name}/>
             </div>
-
             <h1 className="visually-hidden">WTW</h1>
-
             <header className="page-header film-card__head">
               <Logo className={'logo__link'}/>
               <UserBlock/>
             </header>
-
             <div className="film-card__wrap">
               <div className="film-card__desc">
                 <h2 className="film-card__title">{currentFilm.name}</h2>
@@ -57,7 +54,6 @@ function FilmPage() {
                   <span className="film-card__genre">{currentFilm.genre}</span>
                   <span className="film-card__year">{currentFilm.released}</span>
                 </p>
-
                 <div className="film-card__buttons">
                   <Link to={`/player/${currentFilm.id}`} className="btn btn--play film-card__button">
                     <svg viewBox="0 0 19 19" width="19" height="19">
@@ -75,25 +71,19 @@ function FilmPage() {
               </div>
             </div>
           </div>
-
           <div className="film-card__wrap film-card__translate-top">
             <div className="film-card__info">
               <div className="film-card__poster film-card__poster--big">
                 <img src={currentFilm.posterImage} alt={currentFilm.name} width="218" height="327"/>
               </div>
-
               <FilmTabs film={currentFilm} reviews={reviews}/>
             </div>
           </div>
         </section>
-
         <div className="page-content">
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
-
-            <div className="catalog__films-list">
-              <FilmsList films={similarFilms.slice(0, 4)}/>
-            </div>
+            <FilmsList films={similarFilms.slice(0, 4)}/>
           </section>
           <Footer/>
         </div>
@@ -102,4 +92,4 @@ function FilmPage() {
   }
 }
 
-export default FilmPage;
+export default Film;

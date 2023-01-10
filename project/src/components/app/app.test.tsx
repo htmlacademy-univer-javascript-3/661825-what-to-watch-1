@@ -10,7 +10,7 @@ import {render, screen} from '@testing-library/react';
 export function createMockFilms(count:number) {
   const films = [];
   for (let i = 0; i < count; i++) {
-    films.push({id: i + 1, genre: 'comedy', name: `testFilm${i + 1}`, isFavorite:true} as Film);
+    films.push({id: i + 1, genre: 'Comedy', name: `TestFilm${i + 1}`, isFavorite: true} as Film);
   }
   return films;
 }
@@ -22,10 +22,10 @@ const currentFilm = mockFilms[0];
 
 const store = mockStore({
   USER: {
-    authorizationStatus: AuthorizationStatus.Auth,
+    authorizationStatus: AuthorizationStatus.NoAuth,
     user: null
   },
-  DATA: {
+  MAIN: {
     films: mockFilms,
     currentGenre: ALL_GENRES,
     promoFilm: promoFilm,
@@ -51,12 +51,12 @@ const fakeApp = (
 );
 
 describe('Application Routing', () => {
-  it('should render "MainScreen" when user navigate to "/"', () => {
+  it('should render "MainScreen" when navigate to "/"', () => {
     render(fakeApp);
 
     expect(screen.getByText('Play')).toBeInTheDocument();
     expect(screen.getByText(`${ALL_GENRES}`)).toBeInTheDocument();
-    expect(screen.getByText('Sign out')).toBeInTheDocument();
+    expect(screen.getByText('Sign in')).toBeInTheDocument();
   });
 
   it('should render "AuthScreen" when user navigate to "/login"', () => {

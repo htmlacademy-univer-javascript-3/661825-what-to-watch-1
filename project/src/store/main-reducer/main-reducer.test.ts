@@ -2,7 +2,7 @@ import {mainReducer} from './main-reducer';
 import {fetchFilmsAction, fetchPromoFilm, getFavoriteFilmsAction} from '../api-actions';
 import {Film} from '../../types/film';
 import {MainState} from '../../types/store';
-import {ALL_GENRES, Genres} from '../../types/genres';
+import {ALL_GENRES} from '../../types/genres';
 import {createMockFilms} from '../../components/app/app.test';
 import {changeGenre} from '../action';
 
@@ -85,7 +85,7 @@ describe('Main Reducer Tests', () => {
   });
 
   it('should change genre when changeGenreAction', () => {
-    const genre = Genres[0];
+    const genre = 'Fantasy';
     const state: MainState = {
       currentGenre: ALL_GENRES,
       error: null,

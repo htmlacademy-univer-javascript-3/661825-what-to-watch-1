@@ -38,7 +38,6 @@ function FilmOverview(props: FilmOverviewProps) {
           <span className="film-rating__count">{props.film.scoresCount} ratings</span>
         </p>
       </div>
-
       <div className="film-card__text">
         {props.film.description}
         <p className="film-card__director"><strong>Director: {props.film.director}</strong></p>
